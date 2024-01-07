@@ -1,0 +1,26 @@
+version: '3'
+services:
+  mysql_nest:
+    platform: linux/x86_64
+    image: mysql:5.6
+    environment:
+      MYSQL_ROOT_PASSWORD:
+      MYSQL_DATABASE: "nest_todo"
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    ports:
+      - "33061:3306"
+    volumes:
+      - ./db_data:/var/lib/mysql
+  nest:
+    build:
+      context: .
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mysql_nest
+    environment:
+      DB_HOST: mysql_nest
+      DB_PORT: 3306
+      DB_USERNAME: "root"
+      DB_PASSWORD:
+      DB_DATABASE: "nest_todo"

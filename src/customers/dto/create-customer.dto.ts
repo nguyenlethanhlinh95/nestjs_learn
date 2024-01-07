@@ -1,13 +1,11 @@
-import { IsEmail, IsNotEmpty, IsNumber, IsString } from "class-validator";
+import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
 
 export class CreateCustomerDto {
-    @IsNumber()
-    id: number;
+  @IsNotEmpty()
+  @IsString()
+  name: string;
 
-    @IsString()
-    name: string;
-
-    @IsEmail()
-    @IsNotEmpty()
-    email: string;
+  @IsNotEmpty()
+  @IsEmail()
+  email: string;
 }
